@@ -1,2 +1,4 @@
 deps/.*
 rel/phoebus
+(^|/)erl_crash.dump$
+
