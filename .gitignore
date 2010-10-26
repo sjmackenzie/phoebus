@@ -1,5 +1,5 @@
-deps/.*
+deps
 rel/phoebus
 *.dump
 rebar
-
+dev
