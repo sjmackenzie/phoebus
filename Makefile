@@ -31,7 +31,7 @@ stagedevrel: dev1
 	$(foreach dev,$^,$(foreach dep,$(wildcard deps/* apps/*), rm -rf dev/$(dev)/lib/$(shell basename $(dep))-* && ln -sf $(abspath $(dep)) dev/$(dev)/lib;))
 
 
-devrel: dev1
+devrel: dev1 dev2 dev3
 
 dev1 dev2 dev3:
 	mkdir -p dev
