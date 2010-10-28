@@ -1,25 +1,25 @@
 .PHONY: rel deps
 
 all: deps
-	@./rebar compile
+	@rebar compile
 
 deps:
-	@./rebar get-deps
+	@rebar get-deps
 
 rel: deps
-	@./rebar compile generate
+	@rebar compile generate
 
 relforce: deps
-	@./rebar compile generate force=1
+	@rebar compile generate force=1
 
 clean:
-	@./rebar clean
+	@rebar clean
 
 distclean: clean relclean
-	@./rebar delete-deps
+	@rebar delete-deps
 
 test:
-	./rebar skip_deps=true eunit
+	rebar skip_deps=true eunit
 
 relclean:
 	rm -rf rel/phoebus
