@@ -3,6 +3,9 @@
 all: deps
 	@rebar compile
 
+build:
+	@rebar compile
+
 deps:
 	@rebar get-deps
 
