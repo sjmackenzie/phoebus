@@ -1,3 +1,4 @@
+*.beam
 deps
 rel/phoebus
 *.dump
