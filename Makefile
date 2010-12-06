@@ -3,7 +3,7 @@
 all: deps
 	@rebar compile
 
-build:
+compile:
 	@rebar compile
 
 deps:
@@ -45,3 +45,31 @@ devclean: clean
 
 stage : rel
 	$(foreach dep,$(wildcard deps/* apps/*), rm -rf rel/phoebus/lib/$(shell basename $(dep))-* && ln -sf $(abspath $(dep)) rel/phoebus/lib;)
+
+COMBO_PLT = $(HOME)/.phoebus_combo_dialyzer_plt
+
+check_plt: compile
+	dialyzer --check_plt --plt $(COMBO_PLT) --apps $(APPS) \
+		deps/*/ebin
+
+build_plt: compile
+	dialyzer --build_plt --output_plt $(COMBO_PLT) --apps $(APPS) \
+		deps/*/ebin
+
+dialyzer: compile
+	@echo
+	@echo Use "'make check_plt'" to check PLT prior to using this target.
+	@echo Use "'make build_plt'" to build PLT prior to using this target.
+	@echo
+	@sleep 1
+	dialyzer -Wno_return --plt $(COMBO_PLT) deps/*/ebin | \
+	    fgrep -v -f ./dialyzer.ignore-warnings
+
+cleanplt:
+	@echo 
+	@echo "Are you sure?  It takes about 1/2 hour to re-build."
+	@echo Deleting $(COMBO_PLT) in 5 seconds.
+	@echo 
+	sleep 5
+	rm $(COMBO_PLT)
+
