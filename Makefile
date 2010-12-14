@@ -64,12 +64,10 @@ dialyzer: compile
 	@sleep 1
 	dialyzer -Wno_return --plt $(COMBO_PLT) deps/*/ebin | \
 	    fgrep -v -f ./dialyzer.ignore-warnings
-
 cleanplt:
-	@echo 
+	@echo
 	@echo "Are you sure?  It takes about 1/2 hour to re-build."
 	@echo Deleting $(COMBO_PLT) in 5 seconds.
-	@echo 
+	@echo
 	sleep 5
 	rm $(COMBO_PLT)
-
